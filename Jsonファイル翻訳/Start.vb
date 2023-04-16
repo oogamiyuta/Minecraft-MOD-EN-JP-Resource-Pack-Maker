@@ -1,8 +1,11 @@
 ﻿
+Imports System.Net
 Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports Newtonsoft.Json
 
+Imports System.Text.Json
 Public Class Start
     Public endpoint As String = ""
     Public key As String = ""
@@ -192,3 +195,4 @@ Public Class ClsIni
         End Try
     End Function
 End Class
+
