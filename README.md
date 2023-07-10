@@ -1,7 +1,8 @@
 # Minecraft MODファイルの自動翻訳ソフト
 MinecraftのMODを日本語化するソフトです。
-日本語化にはAzureTranslateAPIが必要です。
+日本語化には無料版DeepLのAPIもしくはAzureTranslateAPIが必要です。
 詳しくは各自でググってください。
+
 ![image](https://user-images.githubusercontent.com/120782293/232263552-ab69d380-1988-43af-be26-7d73a9645cd8.png)
 
 # 仕様
