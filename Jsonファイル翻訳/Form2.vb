@@ -11,7 +11,8 @@ Imports System.Runtime.InteropServices
 Public Class Form2
     Private endpoint As String = Start.endpoint
     Private key As String = Start.key
-    Private location As String = Start.Location
+    Private location As String = Start.location
+    Private DeepLKey As String = Start.DeepLKey
 
     Private modid As String
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) _
@@ -37,6 +38,17 @@ Public Class Form2
             pack_format.Enabled = True
         Else
             pack_format.Enabled = False
+        End If
+
+        If Start.Label4.Text = "Azure翻訳 有効" Then
+            Button2.Enabled = False
+            TranslateButton.Enabled = True
+        ElseIf Start.Label4.Text = "無料版DeepL有効" Then
+            Button2.Enabled = True
+            TranslateButton.Enabled = False
+        ElseIf Start.Label4.Text = "無料版DeepL・Azure翻訳 有効" Then
+            Button2.Enabled = True
+            TranslateButton.Enabled = True
         End If
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
@@ -125,6 +137,7 @@ Public Class Form2
                 End Using
             End Using
         Next
+        MsgBox("翻訳終了")
     End Sub
 
     Private Class TranslationResult
@@ -213,4 +226,27 @@ Public Class Form2
         Application.Exit()
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        '翻訳対象のテキストを抽出する
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            Dim text As String = DataGridView1.Rows(i).Cells("Value").Value.ToString()
+
+            '翻訳する
+            Dim apiKey As String = DeepLKey
+            Dim endpoint As String = "https://api-free.deepl.com/v2/translate"
+            Dim fromLanguage As String = "EN"
+            Dim toLanguage As String = "JA"
+
+            Dim url As String = $"{endpoint}?text={Uri.EscapeDataString(text)}&source_lang={fromLanguage}&target_lang={toLanguage}&auth_key={apiKey}"
+            Dim client As New HttpClient()
+            Dim response As HttpResponseMessage = client.GetAsync(url).Result
+            Dim responseContent As String = response.Content.ReadAsStringAsync().Result
+            Dim result As JObject = JObject.Parse(responseContent)
+
+            '翻訳結果を反映する
+            Dim translation As String = result("translations")(0)("text").ToString()
+            DataGridView1.Rows(i).Cells("Value").Value = translation
+        Next
+        MsgBox("翻訳終了")
+    End Sub
 End Class

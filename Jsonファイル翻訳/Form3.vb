@@ -4,6 +4,7 @@ Public Class Form3
     Private endpoint As String = Start.endpoint
     Private key As String = Start.key
     Private location As String = Start.location
+    Private DeepLKey As String = Start.DeepLKey
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '自分自身の存在するフォルダ
@@ -14,6 +15,7 @@ Public Class Form3
         Ini.WriteProfileString("Settings", "Key", TextBox1.Text)
         Ini.WriteProfileString("Settings", "Endpoint", TextBox2.Text)
         Ini.WriteProfileString("Settings", "location", TextBox3.Text)
+        Ini.WriteProfileString("Settings", "DeepLKey", TextBox4.Text)
 
         'INIファイルからの取得テスト
         Dim str As String
@@ -23,18 +25,39 @@ Public Class Form3
         endpoint = str.ToString
         str = Ini.GetProfileString("Settings", "location", "")
         location = str.ToString
+        str = Ini.GetProfileString("Settings", "DeepLKey", "")
+        DeepLKey = str.ToString
         Me.Close()
-        If key = "" AndAlso endpoint = "" AndAlso location = "" Then
-            MsgBox（"設定を開いてAzure 翻訳APIと、 そのエンドポイント及び場所を" & "入力してください。" & vbCrLf & "無料版もあります。詳しくはご自分で調べてください。"）
-            Start.Label4.Height = 161
-            Start.Label4.Text = "設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "無料版もあります。詳しくはご自分で調べてください。"
-        ElseIf key = "" Or endpoint = "" Or location = "" Then
-            MsgBox（"設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "すべて入力されていないと使用できません。"）
-            Start.Label4.Height = 161
-            Start.Label4.Text = "設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "すべて入力されていないと使用できません。"
-        Else
-            Start.Label4.Text = "APIなどが正しいものであれば使用できます。"
+        If DeepLKey <> "" And key <> "" And endpoint <> "" And location <> "" Then
+            Start.Label4.Text = "無料版DeepL・Azure翻訳 有効"
             Start.Label4.Height = 32
+        ElseIf DeepLKey = "" And key <> "" And endpoint <> "" And location <> "" Then
+            Start.Label4.Text = "Azure翻訳 有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint <> "" And location <> "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint = "" And location <> "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint <> "" And location = "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint = "" And location <> "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint <> "" And location = "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint = "" And location = "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint = "" And location = "" Then
+            Start.Label4.Text = "無料版DeepL有効"
+            Start.Label4.Height = 32
+        Else
+            Start.Label4.Text = "無料版DeepL APIもしくはAzure翻訳APIを入力してください"
+            Start.Label4.Height = 161
         End If
     End Sub
 
@@ -51,8 +74,11 @@ Public Class Form3
         TextBox2.Text = str.ToString
         str = Ini.GetProfileString("Settings", "location", "")
         TextBox3.Text = str.ToString
+        str = Ini.GetProfileString("Settings", "DeepLKey", "")
+        TextBox4.Text = str.ToString
         endpoint = TextBox2.Text
         key = TextBox1.Text
         location = TextBox3.Text
+        DeepLKey = TextBox4.Text
     End Sub
 End Class

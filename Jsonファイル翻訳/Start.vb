@@ -10,6 +10,7 @@ Public Class Start
     Public endpoint As String = ""
     Public key As String = ""
     Public location As String = ""
+    Public DeepLKey As String = ""
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Form1.Show()
         Me.Hide()
@@ -39,18 +40,39 @@ Public Class Start
         endpoint = str.ToString
         str = Ini.GetProfileString("Settings", "location", "")
         location = str.ToString
+        str = Ini.GetProfileString("Settings", "DeepLKey", "")
+        DeepLKey = str.ToString
 
-        If key = "" AndAlso endpoint = "" AndAlso location = "" Then
-            MsgBox（"設定を開いてAzure 翻訳APIと、 そのエンドポイント及び場所を" & "入力してください。" & vbCrLf & "無料版もあります。詳しくはご自分で調べてください。"）
-            Label4.Height = 161
-            Label4.Text = "設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "無料版もあります。詳しくはご自分で調べてください。"
-        ElseIf key = "" Or endpoint = "" Or location = "" Then
-            MsgBox（"設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "すべて入力されていないと使用できません。"）
-            Label4.Height = 161
-            Label4.Text = "設定を開いてAzure 翻訳APIと、そのエンドポイント及び場所を入力してください。" & vbCrLf & "すべて入力されていないと使用できません。"
+        If DeepLKey <> "" And key <> "" And endpoint <> "" And location <> "" Then
+            Me.Label4.Text = "無料版DeepL・Azure翻訳 有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey = "" And key <> "" And endpoint <> "" And location <> "" Then
+            Me.Label4.Text = "Azure翻訳 有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint <> "" And location <> "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint = "" And location <> "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint <> "" And location = "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint = "" And location <> "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint <> "" And location = "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key <> "" And endpoint = "" And location = "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
+        ElseIf DeepLKey <> "" And key = "" And endpoint = "" And location = "" Then
+            Me.Label4.Text = "無料版DeepL有効"
+            Me.Label4.Height = 32
         Else
-            Label4.Text = "APIなどが正しいものであれば使用できます。"
-            Label4.Height = 32
+            Me.Label4.Text = "無料版DeepL APIもしくはAzure翻訳APIを入力してください"
+            Me.Label4.Height = 161
         End If
 
     End Sub
@@ -60,6 +82,10 @@ Public Class Start
     End Sub
 
     Private Sub Start_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub
 End Class

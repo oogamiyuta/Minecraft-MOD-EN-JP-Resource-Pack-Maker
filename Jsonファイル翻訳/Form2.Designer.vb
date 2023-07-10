@@ -36,6 +36,7 @@ Partial Class Form2
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.pack_format = New System.Windows.Forms.TextBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -50,7 +51,7 @@ Partial Class Form2
         '
         'TranslateButton
         '
-        Me.TranslateButton.Location = New System.Drawing.Point(93, 12)
+        Me.TranslateButton.Location = New System.Drawing.Point(93, 26)
         Me.TranslateButton.Name = "TranslateButton"
         Me.TranslateButton.Size = New System.Drawing.Size(75, 23)
         Me.TranslateButton.TabIndex = 1
@@ -139,11 +140,21 @@ Partial Class Form2
         Me.pack_format.Size = New System.Drawing.Size(44, 19)
         Me.pack_format.TabIndex = 9
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(93, 1)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 10
+        Me.Button2.Text = "DeepL翻訳"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.pack_format)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.ComboBox1)
@@ -175,4 +186,5 @@ Partial Class Form2
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents pack_format As TextBox
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents Button2 As Button
 End Class
