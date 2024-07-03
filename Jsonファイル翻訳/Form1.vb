@@ -36,6 +36,13 @@ Public Class Form1
     End Sub
 
     Private Sub TranslateButton_Click(sender As Object, e As EventArgs) Handles TranslateButton.Click
+        ProgressBar1.Maximum = DataGridView1.Rows.Count
+        ProgressBar1.Value = 0
+        ProgressBar1.Step = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Maximum = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Value = 0
+        翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+        翻訳中.Show()
 
         '翻訳対象のテキストを抽出する
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
@@ -57,7 +64,7 @@ Public Class Form1
                     request.RequestUri = New Uri(endpoint + route)
                     request.Content = New StringContent(requestBody, Encoding.UTF8, "application/json")
                     request.Headers.Add("Ocp-Apim-Subscription-Key", key)
-                    request.Headers.Add("Ocp-Apim-Subscription-Region", Location)
+                    request.Headers.Add("Ocp-Apim-Subscription-Region", location)
 
                     Dim response As HttpResponseMessage = client.SendAsync(request).GetAwaiter().GetResult()
                     Dim result As String = response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
@@ -67,10 +74,12 @@ Public Class Form1
                     '翻訳結果を反映する
 
                     DataGridView1.Rows(i).Cells("Value").Value = translations.First()("text")
-
+                    ProgressBar1.Value = ProgressBar1.Value + 1
+                    翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
                 End Using
             End Using
         Next
+        翻訳中.Close()
         MsgBox("翻訳終了")
     End Sub
 
@@ -113,6 +122,13 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ProgressBar1.Maximum = DataGridView1.Rows.Count
+        ProgressBar1.Value = 0
+        ProgressBar1.Step = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Maximum = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Value = 0
+        翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+        翻訳中.Show()
         '翻訳対象のテキストを抽出する
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             Dim text As String = DataGridView1.Rows(i).Cells("Value").Value.ToString()
@@ -132,8 +148,11 @@ Public Class Form1
             '翻訳結果を反映する
             Dim translation As String = result("translations")(0)("text").ToString()
             DataGridView1.Rows(i).Cells("Value").Value = translation
+            翻訳中.ProgressBar1.Value = 翻訳中.ProgressBar1.Value + 1
+            ProgressBar1.Value = ProgressBar1.Value + 1
+            翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
         Next
-
+        翻訳中.Close()
         MsgBox("翻訳終了")
     End Sub
 End Class

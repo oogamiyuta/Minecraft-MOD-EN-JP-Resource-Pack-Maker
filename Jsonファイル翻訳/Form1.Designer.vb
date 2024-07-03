@@ -31,6 +31,7 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,11 +108,20 @@ Partial Class Form1
         Me.Button2.Text = "DeepL翻訳"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ProgressBar1.Location = New System.Drawing.Point(0, 444)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(800, 18)
+        Me.ProgressBar1.TabIndex = 7
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(800, 462)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
@@ -136,4 +146,5 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
 End Class

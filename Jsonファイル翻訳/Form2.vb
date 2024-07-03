@@ -21,20 +21,39 @@ Public Class Form2
     End Sub
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.Clear()
-        ComboBox1.Items.Add（"1.13-1.14.4"）
-        ComboBox1.Items.Add（"1.15-1.16.1"）
-        ComboBox1.Items.Add（"1.16.2-1.16.5"）
-        ComboBox1.Items.Add（"1.17.17.1"）
-        ComboBox1.Items.Add（"1.18-1.18.2"）
-        ComboBox1.Items.Add（"1.19-19.2"）
-        ComboBox1.Items.Add（"22w42a-22w44a"）
-        ComboBox1.Items.Add（"22w45a-1.19.3"）
-        ComboBox1.Items.Add（"1.19.4-23w13a"）
-        ComboBox1.Items.Add（"23w14a"）
-        ComboBox1.Items.Add("その他")
-        ComboBox1.SelectedIndex = 5
+        ComboBox1.Items.Add（"リリースVer.1.13～1.14.4 プレVer.17w48a～19w46b"）
+        ComboBox1.Items.Add（"リリースVer.1.15～1.16.1 プレVer.1.15-pre1～1.16.2-pre3"）
+        ComboBox1.Items.Add（"リリースVer.1.16.2～1.16.5 プレVer.1.16.2-rc1～1.16.5"）
+        ComboBox1.Items.Add（"リリースVer.1.17～1.17.1 プレVer.20w45a～21w38a"）
+        ComboBox1.Items.Add（"リリースVer.1.18～1.18.2 プレVer.21w39a～1.18.2"）
+        ComboBox1.Items.Add（"リリースVer.1.19～1.19.2 プレVer.22w11a～1.19.2"）
+        ComboBox1.Items.Add（"リリースVer.欠番 プレVer.欠番"）
+        ComboBox1.Items.Add（"プレVer.22w42a～22w44a"）
+        ComboBox1.Items.Add（"リリースVer.1.19.3 プレVer.22w45a～23w07a"）
+        ComboBox1.Items.Add（"リリースVer.1.19.4 プレVer.1.19.4-pre1～23w13a"）
+        ComboBox1.Items.Add（"プレVer.23w14a～23w16a"）
+        ComboBox1.Items.Add（"リリースVer.1.20～1.20.1 プレVer.23w17a～1.20.1"）
+        ComboBox1.Items.Add（"プレVer.23w31a"）
+        ComboBox1.Items.Add（"プレVer.23w32a～1.20.2-pre1"）
+        ComboBox1.Items.Add（"リリースVer.1.20.2 プレVer.1.20.2-pre2～23w41a"）
+        ComboBox1.Items.Add（"プレVer.23w42a"）
+        ComboBox1.Items.Add（"プレVer.23w43a～23w44a"）
+        ComboBox1.Items.Add（"プレVer.23w45a～23w46a"）
+        ComboBox1.Items.Add（"リリースVer.1.20.3～1.20.4 プレVer.1.20.3-pre1～23w51b"）
+        ComboBox1.Items.Add（"リリースVer.欠番 プレVer.欠番"）
+        ComboBox1.Items.Add（"プレVer.24w03a～24w04a"）
+        ComboBox1.Items.Add（"プレVer.24w05a～24w05b"）
+        ComboBox1.Items.Add（"プレVer.24w06a～24w07"）
+        ComboBox1.Items.Add（"リリースVer.欠番 プレVer.欠番"）
+        ComboBox1.Items.Add（"プレVer.24w09a～24w10a"）
+        ComboBox1.Items.Add（"プレVer.24w11a"）
+        ComboBox1.Items.Add（"プレVer.24w12a"）
+        ComboBox1.Items.Add（"プレVer.24w13a～1.20.5-pre3"）
+        ComboBox1.Items.Add（"リリースVer.1.20.5～ プレVer.1.20.5-pre4～"）
+        ComboBox1.Items.Add("手動設定")
+        ComboBox1.SelectedIndex = 28
         pack_format.Text = ComboBox1.SelectedIndex + 4
-        If ComboBox1.SelectedIndex = 10 Then
+        If ComboBox1.SelectedText = "手動設定" Then
             pack_format.Enabled = True
         Else
             pack_format.Enabled = False
@@ -58,7 +77,7 @@ Public Class Form2
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         pack_format.Text = ComboBox1.SelectedIndex + 4
-        If ComboBox1.SelectedIndex = 10 Then
+        If ComboBox1.SelectedText = "手動設定" Then
             pack_format.Enabled = True
         Else
             pack_format.Enabled = False
@@ -102,7 +121,13 @@ Public Class Form2
 
 
     Private Sub TranslateButton_Click(sender As Object, e As EventArgs) Handles TranslateButton.Click
-
+        ProgressBar1.Maximum = DataGridView1.Rows.Count
+        ProgressBar1.Value = 0
+        ProgressBar1.Step = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Maximum = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Value = 0
+        翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+        翻訳中.Show()
         '翻訳対象のテキストを抽出する
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             Dim text As String = DataGridView1.Rows(i).Cells("Value").Value.ToString()
@@ -133,10 +158,14 @@ Public Class Form2
                     '翻訳結果を反映する
 
                     DataGridView1.Rows(i).Cells("Value").Value = translations.First()("text")
+                    ProgressBar1.Value = ProgressBar1.Value + 1
+                    翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+
 
                 End Using
             End Using
         Next
+        翻訳中.Close()
         MsgBox("翻訳終了")
     End Sub
 
@@ -227,6 +256,13 @@ Public Class Form2
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ProgressBar1.Maximum = DataGridView1.Rows.Count
+        ProgressBar1.Value = 0
+        ProgressBar1.Step = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Maximum = DataGridView1.Rows.Count
+        翻訳中.ProgressBar1.Value = 0
+        翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+        翻訳中.Show()
         '翻訳対象のテキストを抽出する
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             Dim text As String = DataGridView1.Rows(i).Cells("Value").Value.ToString()
@@ -246,7 +282,16 @@ Public Class Form2
             '翻訳結果を反映する
             Dim translation As String = result("translations")(0)("text").ToString()
             DataGridView1.Rows(i).Cells("Value").Value = translation
+            翻訳中.ProgressBar1.Value = 翻訳中.ProgressBar1.Value + 1
+            ProgressBar1.Value = ProgressBar1.Value + 1
+            翻訳中.Label2.Text = ProgressBar1.Value & "/" & ProgressBar1.Step & "翻訳完了"
+
         Next
+        翻訳中.Close()
         MsgBox("翻訳終了")
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 End Class

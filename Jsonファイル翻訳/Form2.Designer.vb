@@ -31,12 +31,12 @@ Partial Class Form2
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.pack_format = New System.Windows.Forms.TextBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -44,14 +44,14 @@ Partial Class Form2
         '
         Me.OpenFileButton.Location = New System.Drawing.Point(12, 12)
         Me.OpenFileButton.Name = "OpenFileButton"
-        Me.OpenFileButton.Size = New System.Drawing.Size(75, 23)
+        Me.OpenFileButton.Size = New System.Drawing.Size(55, 23)
         Me.OpenFileButton.TabIndex = 0
         Me.OpenFileButton.Text = "開く"
         Me.OpenFileButton.UseVisualStyleBackColor = True
         '
         'TranslateButton
         '
-        Me.TranslateButton.Location = New System.Drawing.Point(93, 26)
+        Me.TranslateButton.Location = New System.Drawing.Point(73, 26)
         Me.TranslateButton.Name = "TranslateButton"
         Me.TranslateButton.Size = New System.Drawing.Size(75, 23)
         Me.TranslateButton.TabIndex = 1
@@ -60,7 +60,7 @@ Partial Class Form2
         '
         'SaveFileButton
         '
-        Me.SaveFileButton.Location = New System.Drawing.Point(174, 12)
+        Me.SaveFileButton.Location = New System.Drawing.Point(154, 12)
         Me.SaveFileButton.Name = "SaveFileButton"
         Me.SaveFileButton.Size = New System.Drawing.Size(75, 23)
         Me.SaveFileButton.TabIndex = 2
@@ -86,45 +86,36 @@ Partial Class Form2
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(451, 9)
+        Me.Label1.Location = New System.Drawing.Point(235, 28)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(217, 38)
+        Me.Label1.Size = New System.Drawing.Size(389, 19)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = "注意：.json形式のみ対応" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "       .lang形式は非対応"
+        Me.Label1.Text = "注意：.json形式のみ対応  .lang形式は非対応"
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Gold
         Me.Button1.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.Red
-        Me.Button1.Location = New System.Drawing.Point(692, 18)
+        Me.Button1.Location = New System.Drawing.Point(713, 12)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 5
         Me.Button1.Text = "終了"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(252, 7)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(76, 12)
-        Me.Label2.TabIndex = 6
-        Me.Label2.Text = "マイクラversion"
-        '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(334, 4)
+        Me.ComboBox1.Location = New System.Drawing.Point(235, 3)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(111, 20)
+        Me.ComboBox1.Size = New System.Drawing.Size(325, 20)
         Me.ComboBox1.TabIndex = 7
         '
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(256, 31)
+        Me.LinkLabel1.Location = New System.Drawing.Point(566, 9)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(70, 12)
         Me.LinkLabel1.TabIndex = 8
@@ -134,7 +125,7 @@ Partial Class Form2
         'pack_format
         '
         Me.pack_format.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.pack_format.Location = New System.Drawing.Point(335, 28)
+        Me.pack_format.Location = New System.Drawing.Point(642, 6)
         Me.pack_format.MaxLength = 2
         Me.pack_format.Name = "pack_format"
         Me.pack_format.Size = New System.Drawing.Size(44, 19)
@@ -142,23 +133,31 @@ Partial Class Form2
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(93, 1)
+        Me.Button2.Location = New System.Drawing.Point(73, 1)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 10
         Me.Button2.Text = "DeepL翻訳"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ProgressBar1.Location = New System.Drawing.Point(0, 444)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(800, 18)
+        Me.ProgressBar1.TabIndex = 11
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(800, 462)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.pack_format)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DataGridView1)
@@ -181,10 +180,10 @@ Partial Class Form2
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
-    Friend WithEvents Label2 As Label
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents pack_format As TextBox
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents Button2 As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
 End Class
